@@ -1,0 +1,2 @@
+- https://crates.io/crates/svg2gcode
+- https://github.com/sameer/svg2gcode/blob/master/web/src/state.rs#L122
