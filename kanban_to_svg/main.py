@@ -1,4 +1,4 @@
-from kanban import Kanban
+import kanban
 import ezdxf
 from ezdxf import colors
 from ezdxf.addons.drawing import Frontend, RenderContext, svg, layout
@@ -20,10 +20,12 @@ def export(doc, path):
       page,
       settings=layout.Settings(scale=1, fit_page=False)
       )
-    with open(path, "wt", encoding="utf8") as fp:
-        fp.write(svg_string)
+    if (path != None):
+      with open(path, "wt", encoding="utf8") as fp:
+          fp.write(svg_string)
+    return svg_string
 
-def draw_kanban (kanban:Kanban):
+def draw_kanban (kanban:kanban.Kanban):
   doc = ezdxf.new(dxfversion="R2010")
   doc.layers.add("TEXTLAYER", color=colors.BLACK)
   msp = doc.modelspace()
@@ -31,7 +33,7 @@ def draw_kanban (kanban:Kanban):
   return doc
 
 # Load kanban
-kanban = Kanban("TIS-180", "[Title]", "[Description]", "IS", "5", "FHA")
+kanban = kanban.Kanban("TIS-180", "[Title]", "[Description]", "IS", "5", "FHA")
 # Draw Kanban
 doc = draw_kanban(kanban)
 # Export to SVG

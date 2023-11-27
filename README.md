@@ -14,6 +14,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
   - [SvgToGcode](https://github.com/PadLex/SvgToGcode/tree/master)
   - [ezdxf](https://ezdxf.mozman.at/docs/tutorials/image_export.html#svg-export)
 - [GCode viewer](https://ncviewer.com/)
+- [FastAPI](https://fastapi.tiangolo.com/#installation)
 
 ## Components
 

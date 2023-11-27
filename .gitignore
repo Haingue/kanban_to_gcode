@@ -1,2 +1,10 @@
 # VS Code
 **/.vscode
+
+# VS Code
+**/.code
+
+# Python
+**/env
+__pycache__
+**/__pycache__

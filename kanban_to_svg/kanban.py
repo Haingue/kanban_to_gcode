@@ -1,3 +1,7 @@
+
+import ezdxf
+from ezdxf import colors
+from ezdxf.addons.drawing import Frontend, RenderContext, svg, layout
 from ezdxf.layouts import Modelspace
 
 class Kanban:
@@ -58,3 +62,34 @@ class Kanban:
     self.draw_shop(model)
     self.draw_estimation(model)
     self.draw_member(model)
+
+  def create_doc (self):
+    doc = ezdxf.new(dxfversion="R2010")
+    doc.layers.add("TEXTLAYER", color=colors.BLACK)
+    msp = doc.modelspace()
+    self.draw(msp)
+    return doc
+
+  def create_svg (self, doc):
+    msp = doc.modelspace()
+    # 1. create the render context
+    context = RenderContext(doc)
+    # 2. create the backend
+    backend = svg.SVGBackend()
+    # 3. create the frontend
+    frontend = Frontend(context, backend)
+    # 4. draw the modelspace
+    frontend.draw_layout(msp)
+    # 5. create an kanban foramt  layout [10.5, 6.8]
+    page = layout.Page(0,0, layout.Units.mm, margins=layout.Margins(2, 2, 2, 10))
+    # 6. get the SVG rendering as string - this step is backend dependent
+    svg_string = backend.get_string(
+      page,
+      settings=layout.Settings(scale=1, fit_page=False)
+      )
+    return svg_string
+
+  def generate_svg (self):
+    doc = self.create_doc()
+    svg = self.create_svg(doc)
+    return svg
