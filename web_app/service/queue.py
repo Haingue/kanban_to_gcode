@@ -16,7 +16,13 @@ class GCodeQueue:
   def is_empty (self):
     return len(self.queue) == 0
   
+  def len (self):
+    return len(self.queue)
+  
   def tolist (self):
     return list(self.queue)
+  
+  def peek (self):
+    return self.queue[0]
   
 G_CODE_QUEUE = GCodeQueue()
