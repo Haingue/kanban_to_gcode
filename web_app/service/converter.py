@@ -32,9 +32,9 @@ def add_issue_in_queue (issue: Issue):
   svg = _generate_svg(issue)
   gcode = _generate_gcode(svg)
   kanban = KanbanGCode(
-    id=issue.id,
-    type=issue.type,
-    title=issue.title,
+    id=issue.key,
+    type=issue.fields.typeOfActivity.name,
+    title=issue.fields.summary,
     g_code=gcode,
     creationDate=datetime.now()
   )
