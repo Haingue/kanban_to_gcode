@@ -85,7 +85,7 @@ class Kanban:
     # 6. get the SVG rendering as string - this step is backend dependent
     svg_string = backend.get_string(
       page,
-      settings=layout.Settings(scale=1, fit_page=False)
+      settings=layout.Settings(scale=0.80, fit_page=False)
       )
     return svg_string
 

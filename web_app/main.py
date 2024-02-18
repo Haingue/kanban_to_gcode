@@ -1,4 +1,3 @@
-from typing import Union
 from fastapi import FastAPI
 
 from web_app.jira.app import router as jira_router

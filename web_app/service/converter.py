@@ -10,7 +10,7 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 def _generate_svg (issue: Issue):
-  kanban = Kanban(issue.id, issue.title, issue.description, issue.shop, issue.estimation, issue.member)
+  kanban = Kanban(issue.key, issue.fields.summary, issue.fields.description, issue.fields.shop.name, issue.fields.timeestimate, issue.fields.assignee.displayName)
   return kanban.generate_svg()
 
 def _generate_gcode (svg: str):
@@ -33,7 +33,7 @@ def add_issue_in_queue (issue: Issue):
   gcode = _generate_gcode(svg)
   kanban = KanbanGCode(
     id=issue.key,
-    type=issue.fields.typeOfActivity.name,
+    type=issue.fields.issuetype.name,
     title=issue.fields.summary,
     g_code=gcode,
     creationDate=datetime.now()
