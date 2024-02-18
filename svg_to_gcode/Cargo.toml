@@ -7,3 +7,7 @@ edition = "2021"
 g-code = "0.3.5"
 roxmltree = "0.18.1"
 svg2gcode = "0.1.3"
+
+[[bin]]
+name = "svg_to_gcode"
+path = "src/main.rs"

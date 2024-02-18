@@ -14,7 +14,7 @@ def _generate_svg (issue: Issue):
   return kanban.generate_svg()
 
 def _generate_gcode (svg: str):
-  rust_program = "svg_to_gcode/target/debug/svg_to_gcode.exe"
+  rust_program = "svg_to_gcode"
   logger.info("Svg: %s" % svg)
   rust_process = subprocess.Popen("%s --stream" % (rust_program), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
   rust_stdin = rust_process.stdin
