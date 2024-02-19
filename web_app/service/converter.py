@@ -1,4 +1,5 @@
 import logging
+import os
 import subprocess
 from kanban_to_svg.kanban import Kanban
 from web_app.jira.dto import Issue
@@ -16,7 +17,8 @@ def _generate_svg (issue: Issue):
 def _generate_gcode (svg: str):
   rust_program = "svg_to_gcode"
   logger.info("Svg: %s" % svg)
-  rust_process = subprocess.Popen("%s --stream" % (rust_program), stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+  env = os.environ.copy()
+  rust_process = subprocess.Popen([rust_program, "--stream"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, env=env)
   rust_stdin = rust_process.stdin
   rust_stdin.write(svg.encode())
   rust_stdin.close()

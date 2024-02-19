@@ -1,19 +1,13 @@
+# Rust builder stage
 FROM rust:1.75.0 as builder-svgtogcode
 WORKDIR /usr/src/svg_to_gcode
 COPY ./svg_to_gcode/Cargo.toml .
-Copy ./svg_to_gcode/Cargo.lock .
-#RUN cargo build --release
+COPY ./svg_to_gcode/Cargo.lock .
 COPY svg_to_gcode/src ./src
 COPY svg_to_gcode/resources ./resources
 RUN cargo build --release
 
-
-#FROM debian:bullseye-slim as svgtogcode
-#RUN apt-get update && apt-get install -y extra-runtime-dependencies && rm -rf /var/lib/apt/lists/*
-#COPY --from=builder /usr/local/cargo/bin/svg_to_gcode /usr/local/bin/svg_to_gcode
-#CMD ["svg_to_gcode"]
-
-
+# Final stage
 FROM python:3.9
 WORKDIR /app
 COPY ./requirements.txt /app/requirements.txt
